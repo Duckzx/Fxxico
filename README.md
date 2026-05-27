@@ -1,11 +1,12 @@
+<a name="top"></a>
 <div align="center">
 
 <!-- Typing SVG -->
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=28&pause=1000&color=FF6B6B&center=true&vCenter=true&width=600&lines=Oi%2C+eu+sou+o+Francisco+%F0%9F%91%8B;Software+Engineering+Student;Full-Stack+%26+Mobile+Dev;Building+things+that+matter.)](https://git.io/typing-svg)
+[![Oi, eu sou o Francisco - Software Engineering Student](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=28&pause=1000&color=FF6B6B&center=true&vCenter=true&width=600&lines=Oi%2C+eu+sou+o+Francisco+%F0%9F%91%8B;Software+Engineering+Student;Full-Stack+%26+Mobile+Dev;Building+things+that+matter.)](https://git.io/typing-svg)
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=header&text=&fontSize=0" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=header&text=&fontSize=0" width="100%" alt="Banner decorativo de ondas em gradiente no topo"/>
 
 </div>
 
@@ -89,8 +90,8 @@ Sou estudante de Engenharia de Software apaixonado por criar interfaces que comb
 
 <div align="center">
 
-<img height="170em" src="https://github-readme-stats.vercel.app/api?username=Duckzx&show_icons=true&theme=radical&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117&title_color=FF6B6B&icon_color=FF6B6B"/>
-<img height="170em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Duckzx&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=FF6B6B"/>
+<img height="170em" src="https://github-readme-stats.vercel.app/api?username=Duckzx&show_icons=true&theme=radical&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117&title_color=FF6B6B&icon_color=FF6B6B" alt="Estatísticas gerais do GitHub de Duckzx"/>
+<img height="170em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Duckzx&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=FF6B6B" alt="Linguagens de programação mais utilizadas por Duckzx"/>
 
 </div>
 
@@ -119,9 +120,13 @@ Sou estudante de Engenharia de Software apaixonado por criar interfaces que comb
 
 ---
 
+<div align="right">
+  <a href="#top">↑ Voltar ao topo</a>
+</div>
+
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%" alt="Banner decorativo de ondas em gradiente no rodapé"/>
 
 *"Build things. Ship things. Repeat."*
 
