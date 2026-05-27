@@ -11,6 +11,16 @@
 
 ---
 
+## 📍 Sumário
+
+- [👤 Sobre mim](#-sobre-mim)
+- [🚀 Projetos em Destaque](#-projetos-em-destaque)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📊 GitHub Stats](#-github-stats)
+- [🌐 Conecte-se comigo](#-conecte-se-comigo)
+
+---
+
 ## 👤 Sobre mim
 
 ```ts
@@ -24,21 +34,25 @@ const francisco = {
 };
 ```
 
-Sou estudante de Engenharia de Software apaixonado por criar interfaces que combinam **performance técnica com identidade visual forte**. Durante o dia trabalho como assistente jurídico; nas horas vagas, construo projetos que vão direto pro portfólio e impressionam recrutadores.
+Sou estudante de Engenharia de Software apaixonado por criar interfaces que combinam **performance técnica com identidade visual forte**. Durante o dia, trabalho como assistente jurídico, o que me deu uma base sólida em organização e atenção aos detalhes. Nas horas vagas, mergulho no código para construir projetos que resolvem problemas reais e impressionam pela estética e funcionalidade.
 
 ---
 
 ## 🚀 Projetos em Destaque
 
-| Projeto | Descrição | Stack |
-|---|---|---|
-| 🛍️ **[Allure Store](https://github.com/Duckzx/sitealluretest)** | E-commerce de luxo com animações cinematográficas e estética dourada | HTML · CSS · JS |
-| 👔 **F&C Fardamentos** | Site B2B para empresa de uniformes — tema dual dark/light, CTA WhatsApp | HTML · CSS · JS |
-| 💘 **Ember** | Conceito de produto que transforma matches em encontros reais | HTML · CSS · JS |
-| 📱 **LifeOS** | App de produtividade pessoal: finanças, Pomodoro e notas PARA | React Native · Expo · Zustand |
-| 🎧 **AudioScript** | App de transcrição de áudio via Claude API, com suporte a PT-BR | HTML · CSS · JS · Claude API |
-| 💑 **[Pote Sagrado](https://github.com/Duckzx/Pote-Sagrado---Casais)** | App para casais alcançarem metas de viagem juntos | TypeScript |
-| ⚖️ **[JusCore Web](https://github.com/Duckzx/juscore-web)** | Plataforma jurídica web | HTML · CSS · JS |
+<div align="center">
+
+| Projeto | Descrição | Stack | Status |
+| :--- | :--- | :--- | :---: |
+| 🛍️ **[Allure Store](https://github.com/Duckzx/sitealluretest)** | E-commerce de luxo com animações cinematográficas e estética dourada. | `HTML` `CSS` `JS` | 🚀 |
+| 🎨 **[Trapiá Artesanato](https://github.com/Duckzx/TrapiaArtesanato)** | Site para divulgação de artesanato local com foco em UI/UX. | `HTML` `CSS` `JS` | ✨ |
+| ⚖️ **[JusCore Web](https://github.com/Duckzx/juscore-web)** | Plataforma jurídica web para gestão de processos e clientes. | `HTML` `CSS` `JS` | 🛠️ |
+| 💑 **[Pote Sagrado](https://github.com/Duckzx/Pote-Sagrado---Casais)** | App para casais alcançarem metas de viagem juntos. | `TypeScript` `Mobile` | 📱 |
+| 📱 **LifeOS** | App de produtividade pessoal: finanças, Pomodoro e notas PARA. | `React Native` `Zustand` | 🏗️ |
+| 🎧 **AudioScript** | App de transcrição de áudio via Claude API, com suporte a PT-BR. | `JS` `Claude API` | 🧪 |
+| 👔 **F&C Fardamentos** | Site B2B para empresa de uniformes com CTA WhatsApp. | `HTML` `CSS` `JS` | ✅ |
+
+</div>
 
 ---
 
@@ -46,30 +60,26 @@ Sou estudante de Engenharia de Software apaixonado por criar interfaces que comb
 
 <div align="center">
 
-**Frontend**
-
+### 💻 Frontend
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-**Mobile**
-
+### 📱 Mobile
 ![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=react&logoColor=white)
 
-**Ferramentas**
-
+### ⚙️ Backend & Tools
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
-
-**Aprendendo**
-
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=react&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 </div>
 
@@ -92,13 +102,18 @@ Sou estudante de Engenharia de Software apaixonado por criar interfaces que comb
 
 ---
 
-## 🌐 Onde me encontrar
+## 🌐 Conecte-se comigo
 
 <div align="center">
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/SEU-USUARIO)
 [![Portfolio](https://img.shields.io/badge/Portfólio-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://SEU-PORTFOLIO.com)
 [![Gmail](https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:SEU-EMAIL@gmail.com)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/SEU-NUMERO)
+
+<br/>
+
+*Sempre aberto a colaborações em projetos open-source e novas oportunidades!*
 
 </div>
 
