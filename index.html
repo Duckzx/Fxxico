@@ -24,7 +24,8 @@ main{max-width:1500px;margin:0 auto;padding:24px}
 h1{font-size:clamp(27px,4vw,44px);margin:0 0 12px;text-transform:uppercase;line-height:1.02} h1 b{color:var(--purple2)}
 .hero p{color:var(--muted);max-width:700px;line-height:1.6}
 .progress{display:flex;align-items:end;gap:10px;height:140px;margin-top:20px}
-.bar-wrap{flex:1;display:flex;align-items:center;flex-direction:column;gap:8px}
+.bar-wrap{flex:1;display:flex;align-items:center;flex-direction:column;gap:8px;cursor:pointer;transition:.2s;outline:none;border-radius:10px;padding:5px 0}
+.bar-wrap:hover,.bar-wrap:focus-visible{opacity:.7;background:rgba(255,255,255,.05)}
 .bar{width:100%;height:0;border-radius:7px 7px 3px 3px;background:linear-gradient(var(--purple2),var(--purple));min-height:2px;transition:height .3s}
 .bar-label{font-size:11px;color:var(--muted);text-align:center}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -83,10 +84,10 @@ input,select{width:100%;border:1px solid var(--stroke);background:#0b0e19;color:
   </div>
 </section>
 <section class="controls">
-  <input id="search" placeholder="Buscar jogo, tema ou headline…" oninput="render()">
-  <select id="season" onchange="render()"><option value="">Todas as temporadas</option><option>TEMPORADA 01 — DESCOBERTA</option><option>TEMPORADA 02 — DOMÍNIO</option></select>
-  <select id="statusFilter" onchange="render()"><option value="">Todos os status</option></select>
-  <select id="sort" onchange="render()"><option value="date">Ordenar por data</option><option value="theme">Ordenar por tema</option></select>
+  <input id="search" placeholder="Buscar jogo, tema ou headline…" oninput="render()" aria-label="Buscar posts">
+  <select id="season" onchange="render()" aria-label="Filtrar por temporada"><option value="">Todas as temporadas</option><option>TEMPORADA 01 — DESCOBERTA</option><option>TEMPORADA 02 — DOMÍNIO</option></select>
+  <select id="statusFilter" onchange="render()" aria-label="Filtrar por status"><option value="">Todos os status</option></select>
+  <select id="sort" onchange="render()" aria-label="Ordenar posts"><option value="date">Ordenar por data</option><option value="theme">Ordenar por tema</option></select>
 </section>
 <div id="board" class="board"></div>
 <p class="note">As artes ainda não estão inseridas neste painel. Ao gerar cada lote, salve os PNGs nos caminhos exibidos no detalhe de cada post e atualize o status.</p>
@@ -105,6 +106,7 @@ DB.statuses.forEach(s => statusSelect.insertAdjacentHTML('beforeend', `<option>$
 
 function getStatus(id, fallback) { return statusState[id] || fallback; }
 function setStatus(id, status) { statusState[id] = status; localStorage.setItem(stateKey, JSON.stringify(statusState)); render(); }
+function filterByStatus(status) { document.getElementById('statusFilter').value = status; render(); }
 function formatDate(s) { const [y,m,d]=s.split('-'); return `${d}/${m}/${y}`; }
 
 function renderProgress(posts) {
@@ -113,7 +115,7 @@ function renderProgress(posts) {
   const main = ['Planejado','Em criação','Gerado','Aprovado','Agendado','Publicado'];
   const max = Math.max(...main.map(s => counts[s]), 1);
   document.getElementById('progress').innerHTML = main.map(s =>
-    `<div class="bar-wrap"><div class="bar" style="height:${Math.max(2, counts[s]/max*102)}px"></div><strong>${counts[s]}</strong><div class="bar-label">${s}</div></div>`
+    `<div class="bar-wrap" role="button" tabindex="0" onclick="filterByStatus('${s}')" onkeydown="if(event.key==='Enter'||event.key===' ')filterByStatus('${s}')" title="Filtrar por ${s}"><div class="bar" style="height:${Math.max(2, counts[s]/max*102)}px"></div><strong>${counts[s]}</strong><div class="bar-label">${s}</div></div>`
   ).join('');
 }
 
@@ -167,5 +169,6 @@ function exportCSV() {
  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='fxxico_cronograma_status.csv'; a.click();
 }
 render();
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 </script>
 </body></html>
