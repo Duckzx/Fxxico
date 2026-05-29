@@ -55,19 +55,22 @@ input,select{width:100%;border:1px solid var(--stroke);background:#0b0e19;color:
 .note{font-size:12px;color:var(--muted);margin:18px 0}
 @media(max-width:900px){.hero{grid-template-columns:1fr} .controls{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){main{padding:13px} header{padding:15px} .controls{grid-template-columns:1fr} .board{grid-template-columns:1fr}}
+.skip-link { position: absolute; top: -100px; left: 10px; background: var(--purple); color: #fff; padding: 10px 15px; border-radius: 0 0 8px 8px; z-index: 1000; transition: top 0.2s; text-decoration: none; font-weight: 700; font-size: 14px; border: 1px solid var(--stroke); border-top: none; }
+.skip-link:focus { top: 0; outline: 2px solid var(--purple2); }
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 <header>
   <div class="brand"><div class="logo">f<span>x</span>xico</div><div><div class="tag">Central de produção</div><small style="color:var(--muted)">60 posts • 420 artes • sem repetição</small></div></div>
   <div class="actions">
     <button onclick="exportCSV()">Exportar CSV</button>
     <button onclick="exportBackup()">Backup JSON</button>
-    <label class="upload-btn">Importar andamento<input style="display:none" type="file" accept=".json" onchange="importBackup(event)"></label>
-    <button onclick="openBlocked()">Bloqueados</button>
+    <label class="upload-btn" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' ') this.querySelector('input').click()">Importar andamento<input style="display:none" type="file" accept=".json" onchange="importBackup(event)"></label>
+    <button onclick="openBlocked(this)">Bloqueados</button>
   </div>
 </header>
-<main>
+<main id="main-content">
 <section class="hero">
   <div class="hero-card">
     <div class="tag">Planejamento editorial • 15/06/2026 → 11/10/2026</div>
@@ -137,19 +140,27 @@ function render() {
     <p class="subtitle">“${escapeHTML(p.subtitle)}”</p>
     <p class="palette">Cores: ${escapeHTML(p.palette)}</p>
     <div class="games">${p.games.map((g,i)=>`<div class="game"><b>${String(i+1).padStart(2,'0')}</b> • ${escapeHTML(g)}</div>`).join('')}</div>
-    <div class="post-footer"><select onchange="setStatus('${p.post_id}', this.value)">${DB.statuses.map(s=>`<option ${getStatus(p.post_id,p.status)===s?'selected':''}>${s}</option>`).join('')}</select><button class="details-btn" onclick="openPost('${p.post_id}')">Arquivos</button></div>
+    <div class="post-footer"><select aria-label="Status do post ${p.post_id}" onchange="setStatus('${p.post_id}', this.value)">${DB.statuses.map(s=>`<option ${getStatus(p.post_id,p.status)===s?'selected':''}>${s}</option>`).join('')}</select><button class="details-btn" aria-label="Ver arquivos do post ${p.post_id}" onclick="openPost('${p.post_id}', this)">Arquivos</button></div>
   </article>`).join('');
 }
-function openPost(id) {
+let lastFocus;
+function openPost(id, el) {
+ lastFocus = el;
  const p=DB.posts.find(x=>x.post_id===id);
  document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2>${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.querySelector('#drawer .close').focus(), 100);
 }
-function openBlocked() {
+function openBlocked(el) {
+ lastFocus = el;
  document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2>Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.querySelector('#drawer .close').focus(), 100);
 }
-function closeDrawer() { document.getElementById('drawer').classList.remove('show'); }
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('show');
+  if(lastFocus) lastFocus.focus();
+}
 function exportBackup() {
  const content = JSON.stringify({savedAt:new Date().toISOString(), statusState}, null, 2);
  const blob = new Blob([content], {type:'application/json'});
