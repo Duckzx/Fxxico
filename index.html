@@ -91,7 +91,7 @@ input,select{width:100%;border:1px solid var(--stroke);background:#0b0e19;color:
 <div id="board" class="board"></div>
 <p class="note">As artes ainda não estão inseridas neste painel. Ao gerar cada lote, salve os PNGs nos caminhos exibidos no detalhe de cada post e atualize o status.</p>
 </main>
-<div class="drawer" id="drawer">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
   <button class="close" onclick="closeDrawer()">Fechar</button>
   <div id="drawerContent"></div>
 </div>
@@ -103,6 +103,7 @@ const escapeHTML = s => String(s).replace(/[&<>'"]/g, m=>({'&':'&amp;','<':'&lt;
 const statusSelect = document.getElementById('statusFilter');
 DB.statuses.forEach(s => statusSelect.insertAdjacentHTML('beforeend', `<option>${escapeHTML(s)}</option>`));
 
+let lastActiveElement;
 function getStatus(id, fallback) { return statusState[id] || fallback; }
 function setStatus(id, status) { statusState[id] = status; localStorage.setItem(stateKey, JSON.stringify(statusState)); render(); }
 function formatDate(s) { const [y,m,d]=s.split('-'); return `${d}/${m}/${y}`; }
@@ -141,15 +142,27 @@ function render() {
   </article>`).join('');
 }
 function openPost(id) {
+ lastActiveElement = document.activeElement;
  const p=DB.posts.find(x=>x.post_id===id);
- document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2>${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2 id="drawerTitle">${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.querySelector('#drawer .close').focus(), 100);
 }
 function openBlocked() {
- document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2>Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
+ lastActiveElement = document.activeElement;
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2 id="drawerTitle">Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.querySelector('#drawer .close').focus(), 100);
 }
-function closeDrawer() { document.getElementById('drawer').classList.remove('show'); }
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('show');
+  if (lastActiveElement) lastActiveElement.focus();
+}
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('drawer').classList.contains('show')) {
+    closeDrawer();
+  }
+});
 function exportBackup() {
  const content = JSON.stringify({savedAt:new Date().toISOString(), statusState}, null, 2);
  const blob = new Blob([content], {type:'application/json'});
