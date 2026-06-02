@@ -1,0 +1,3 @@
+## 2025-05-15 - Focus Management and ARIA in Vanilla JS Dashboards
+**Learning:** In a single-file static dashboard with CSS transitions, immediate focus calls can fail if the element is still being animated or is hidden. A small delay (e.g., 100ms) ensures focus management works reliably. Additionally, custom elements like labels used as buttons are often forgotten in keyboard navigation paths.
+**Action:** Always save the `lastActiveElement` before opening modals/drawers and restore it on close. Use `setTimeout` for focusing within transitions and ensure all custom interactive elements have `tabindex="0"`, `role="button"`, and Space/Enter handlers.
