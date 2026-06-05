@@ -1,0 +1,3 @@
+## 2025-05-15 - Drawer Focus Management and Accessibility
+**Learning:** Drawers and modals require explicit focus management (storing the trigger element, moving focus to a primary action like 'Close', and restoring it on exit) and ARIA attributes (`role="dialog"`, `aria-modal="true"`) to be truly accessible to screen reader and keyboard users. Using a small delay (e.g., 100ms) for focus movement ensures the transition has started and the element is ready to receive focus.
+**Action:** Always implement `lastActiveElement` tracking and ARIA labels when adding interactive overlays. Use a global 'Escape' key listener to provide a standard exit path for keyboard users.
