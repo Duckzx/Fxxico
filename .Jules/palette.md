@@ -1,0 +1,3 @@
+## 2024-05-20 - Accessible Drawer Lifecycle Management
+**Learning:** Drawers and modals in vanilla projects often lack proper lifecycle hooks for accessibility. Simply showing/hiding an element is insufficient; one must manually manage ARIA attributes (role="dialog", aria-modal="true") and focus states. Focus should be moved to the primary action (e.g., close button) after animations begin and restored to the trigger element upon closing to prevent keyboard users from losing their place.
+**Action:** Always implement a three-part focus strategy for dialogs: 1) Save trigger element, 2) Move focus to close button/first input on open (delayed if animated), 3) Restore focus on close. Integrate an 'Escape' key listener that only triggers when the dialog is active.
