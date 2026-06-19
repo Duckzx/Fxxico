@@ -1,0 +1,3 @@
+## 2025-05-15 - Accessible Drawer and Focus Management
+**Learning:** In vanilla JavaScript dashboards, modals/drawers often lack focus management and keyboard support. Using a combination of `role="dialog"`, `aria-modal="true"`, and manual focus restoration using `document.activeElement` significantly improves the UX for keyboard and screen reader users. A small delay (`setTimeout`) is often necessary when focusing elements inside components that use CSS transitions.
+**Action:** Always implement focus traps or at least manual focus shift and restoration when building custom dialogs/drawers. Use semantic ARIA roles to correctly identify these components to assistive technologies.
