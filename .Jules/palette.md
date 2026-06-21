@@ -1,0 +1,3 @@
+## 2025-05-14 - Accessible Drawers and Custom Interactive Labels
+**Learning:** In single-file vanilla JS applications, interactive elements often lack standard accessibility features like focus management and keyboard listeners. A "button" implemented as a label for a hidden file input is invisible to screen readers and keyboard users unless explicitly given a role, tabindex, and keydown listeners. Similarly, drawers need manual focus management (trap and restore) and ARIA roles to be perceived as modals.
+**Action:** Always verify that custom interactive elements have 'role="button"', 'tabindex="0"', and handle 'Enter/Space' keys. For modals, implement a global 'Escape' listener and ensure focus is restored to the trigger element on close.
