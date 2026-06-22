@@ -1,0 +1,3 @@
+## 2026-06-22 - Accessible Drawer and Control Patterns
+**Learning:** In vanilla JS projects with transition-based drawers, manual focus management (storing the active element, focusing the close button after a transition delay, and restoring focus on close) is critical for a predictable keyboard experience. Additionally, label-wrapped hidden inputs require explicit role, tabindex, and keydown listeners to be accessible.
+**Action:** When implementing drawers, always include role="dialog", aria-modal="true", and focus trapping/restoration. For custom input triggers, ensure they have role="button" and handle Enter/Space keys.
