@@ -1,0 +1,3 @@
+## 2026-06-24 - Accessible Custom File Upload & Drawer Focus Management
+**Learning:** Custom file upload triggers (like a label wrapping a hidden input) are not keyboard-accessible by default. Drawers require manual focus management to ensure screen reader users aren't left in a focus vacuum when the trigger disappears or the dialog opens.
+**Action:** Always add `tabindex="0"`, `role="button"`, and `keydown` (Enter/Space) listeners to custom interactive labels. For drawers, capture `document.activeElement` before opening, focus the primary action (e.g., close button) on open, and restore focus on close.
