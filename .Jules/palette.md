@@ -1,0 +1,3 @@
+## 2025-05-14 - Accessible Modal Drawers and File Uploads in Vanilla JS
+**Learning:** In static vanilla JS projects, focus management for modals requires manual tracking of the trigger element and a small delay (e.g., 100ms) to ensure interactive elements are visible and focusable after CSS transitions start. Additionally, labels used as file upload triggers must be explicitly made focusable and handled via keyboard events to be accessible.
+**Action:** Always implement a `lastActiveElement` pattern for modals and ensure `<label>` triggers have `tabindex="0"`, `role="button"`, and `Enter`/`Space` key handlers.
