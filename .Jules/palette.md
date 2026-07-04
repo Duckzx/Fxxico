@@ -1,0 +1,3 @@
+## 2025-05-14 - Drawer Focus Management and Accessibility
+**Learning:** In static HTML projects using CSS transforms for drawers, standard Playwright visibility checks may fail because the element remains in the DOM and is not technically "hidden" by display:none. Additionally, immediate .focus() calls on elements within a drawer can fail if triggered before a CSS transition begins or completes.
+**Action:** Use a small delay (e.g., 100ms) or `transitionend` event before focusing internal elements. Verify visibility in tests by checking for CSS classes (like .show) instead of using is_visible(). Always restore focus to the trigger element on close for a seamless keyboard experience.
