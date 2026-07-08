@@ -1,0 +1,3 @@
+## 2025-07-08 - Accessible Focus Management in Animated Drawers
+**Learning:** Animated UI elements like drawers require manual focus management to ensure accessibility. Specifically, focusing the first interactive element (like a close button) should be delayed slightly (e.g., 100ms) to ensure the browser successfully moves focus after the CSS transition starts or the element becomes interactive. Restoring focus to the original trigger element upon closing is essential for a seamless keyboard navigation experience.
+**Action:** Always implement a focus-trap or at least basic focus management (move on open, restore on close) for modals and drawers. Use `setTimeout` for focusing if transitions are involved.
