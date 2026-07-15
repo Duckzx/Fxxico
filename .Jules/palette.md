@@ -1,0 +1,3 @@
+## 2025-01-24 - Focus Management in Animated Drawers
+**Learning:** In projects using CSS transitions for side drawers (e.g., `transform: translateX`), immediate `.focus()` calls on inner elements can fail or cause visual "jumping" if the browser doesn't consider the element fully interactable during the start of the transition.
+**Action:** Use a `setTimeout` delay (matching ~80% of the transition duration, e.g., 200ms for a 250ms transition) to move focus to the first interactive element (like a Close button). Always pair this with a global `lastActiveElement` variable to restore focus upon closing for a seamless keyboard experience.
