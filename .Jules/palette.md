@@ -1,0 +1,7 @@
+## 2026-07-19 - Focus management delays in animated drawers
+**Learning:** Animated side drawers utilizing CSS transitions (such as translating from translateX(105%) to translateX(0)) can result in focus-setting race conditions. When calling `.focus()` immediately after adding the active CSS class, the browser may fail to set focus or draw focus rings correctly because the drawer is not yet fully interactable. Adding a small timeout (e.g., 100ms to 300ms) allows the CSS transition to start, ensuring the element is visible and interactable before focus is programmatically shifted.
+**Action:** When implementing modal dialogs or drawers with CSS transitions, always wrap focus management inside a small `setTimeout` delay.
+
+## 2026-07-19 - Accessible wrapper labels for hidden input buttons
+**Learning:** Native `<label>` elements wrapping hidden files or checkbox inputs are mouse-clickable but are excluded from the default keyboard tab sequence, rendering them entirely inaccessible for keyboard-only and screen reader users. Simply styling the label to look like a button does not provide keyboard focus. To make custom controls fully accessible, the wrapper must explicitly have `tabindex="0"`, `role="button"`, and a keyboard event handler for `Enter` and `Space` keys to programmatically click the nested input.
+**Action:** Ensure custom label controls are accessible by assigning a button role, enabling tab navigation, and intercepting keyboard triggers to invoke the hidden input.
