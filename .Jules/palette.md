@@ -1,0 +1,7 @@
+## 2026-07-30 - Focus Management with Animated Drawer Transitions
+**Learning:** Programmatic `.focus()` calls on interactive elements inside slide-out drawers or modal containers can fail or be ignored by the browser if the call occurs before the transition has completed or while the element is still deemed non-interactable or hidden. Introducing a short delay (e.g., 200ms) with `setTimeout` before shifting focus guarantees the focus action registers reliably and accessibility requirements are met.
+**Action:** When programmatically opening dynamic drawers or modals, wrap focus management logic inside a brief delay block that aligns with transition animations to ensure screen readers and keyboard users correctly land on the modal's primary focus target (such as the close button).
+
+## 2026-07-30 - Conversion of Functional Labels to Accessible Custom Buttons
+**Learning:** Simply adding keyboard listeners (`role="button"`, `tabindex="0"`, `onkeydown`) to label tags wraps their behavior, but a cleaner, robust alternative is often refactoring them into semantic buttons or ensuring clear keyboard activations (Enter and Space key) explicitly trigger underlying invisible files or input changes.
+**Action:** When using styling wrappers over `<input type="file">`, apply proper interactive roles, key handling, and matching `focus-visible` outline treatments so keyboard-only users can navigate and trigger file dialogs as seamlessly as mouse users.
