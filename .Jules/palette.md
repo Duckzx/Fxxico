@@ -1,0 +1,3 @@
+## 2026-06-15 - Delaying Focus in Animated Drawers
+**Learning:** When managing focus in drawers or modals animated with CSS transitions (such as `translateX` or `opacity`), calling `.focus()` immediately on elements inside the drawer (like the close button) can fail. This is because modern browsers often do not focus or consider elements interactable if their parent container is currently in the middle of a transition animation or is not yet fully visible.
+**Action:** Always wrap focus transitions to modal/drawer children in a `setTimeout` (ideally between 100ms and 300ms) to ensure the CSS transition has begun or completed, and the browser can successfully apply programmatic focus.
