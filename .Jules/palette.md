@@ -1,0 +1,3 @@
+## 2026-08-10 - Focus Management Delays in Animated Drawers
+**Learning:** Immediate `.focus()` programmatic calls on interactive elements inside custom drawers/modals often fail when coupled with CSS transition animations (such as slide-ins or fades), as the browser may not consider the element interactable until the animation is actively underway. Adding a minor timeout delay (100ms-300ms) reliably catches the focus and preserves accessibility.
+**Action:** When programmatically focusing elements inside transition-animated components, always utilize a delayed focus (e.g., via `setTimeout`) matching the beginning of the CSS transition.
