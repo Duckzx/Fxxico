@@ -83,16 +83,16 @@ input,select{width:100%;border:1px solid var(--stroke);background:#0b0e19;color:
   </div>
 </section>
 <section class="controls">
-  <input id="search" placeholder="Buscar jogo, tema ou headline…" oninput="render()">
-  <select id="season" onchange="render()"><option value="">Todas as temporadas</option><option>TEMPORADA 01 — DESCOBERTA</option><option>TEMPORADA 02 — DOMÍNIO</option></select>
-  <select id="statusFilter" onchange="render()"><option value="">Todos os status</option></select>
-  <select id="sort" onchange="render()"><option value="date">Ordenar por data</option><option value="theme">Ordenar por tema</option></select>
+  <input id="search" aria-label="Buscar jogo, tema ou headline" placeholder="Buscar jogo, tema ou headline…" oninput="render()">
+  <select id="season" aria-label="Filtrar por temporada" onchange="render()"><option value="">Todas as temporadas</option><option>TEMPORADA 01 — DESCOBERTA</option><option>TEMPORADA 02 — DOMÍNIO</option></select>
+  <select id="statusFilter" aria-label="Filtrar por status" onchange="render()"><option value="">Todos os status</option></select>
+  <select id="sort" aria-label="Ordenar por data ou tema" onchange="render()"><option value="date">Ordenar por data</option><option value="theme">Ordenar por tema</option></select>
 </section>
 <div id="board" class="board"></div>
 <p class="note">As artes ainda não estão inseridas neste painel. Ao gerar cada lote, salve os PNGs nos caminhos exibidos no detalhe de cada post e atualize o status.</p>
 </main>
-<div class="drawer" id="drawer">
-  <button class="close" onclick="closeDrawer()">Fechar</button>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <button class="close" id="closeDrawerBtn" aria-label="Fechar gaveta" onclick="closeDrawer()">Fechar</button>
   <div id="drawerContent"></div>
 </div>
 <script>
@@ -140,16 +140,32 @@ function render() {
     <div class="post-footer"><select onchange="setStatus('${p.post_id}', this.value)">${DB.statuses.map(s=>`<option ${getStatus(p.post_id,p.status)===s?'selected':''}>${s}</option>`).join('')}</select><button class="details-btn" onclick="openPost('${p.post_id}')">Arquivos</button></div>
   </article>`).join('');
 }
+let lastActiveElement = null;
+function openDrawer() {
+  lastActiveElement = document.activeElement;
+  document.getElementById('drawer').classList.add('show');
+  setTimeout(() => document.getElementById('closeDrawerBtn')?.focus(), 100);
+}
 function openPost(id) {
  const p=DB.posts.find(x=>x.post_id===id);
- document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2>${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
- document.getElementById('drawer').classList.add('show');
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2 id="drawerTitle">${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
+ openDrawer();
 }
 function openBlocked() {
- document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2>Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
- document.getElementById('drawer').classList.add('show');
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2 id="drawerTitle">Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
+ openDrawer();
 }
-function closeDrawer() { document.getElementById('drawer').classList.remove('show'); }
+function closeDrawer() {
+ document.getElementById('drawer').classList.remove('show');
+ if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+   lastActiveElement.focus();
+ }
+}
+document.addEventListener('keydown', e => {
+ if (e.key === 'Escape' && document.getElementById('drawer').classList.contains('show')) {
+   closeDrawer();
+ }
+});
 function exportBackup() {
  const content = JSON.stringify({savedAt:new Date().toISOString(), statusState}, null, 2);
  const blob = new Blob([content], {type:'application/json'});
