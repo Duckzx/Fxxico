@@ -10,7 +10,7 @@
   --purple:#8b5cf6; --purple2:#c084fc; --cyan:#36d9ff; --green:#30e69b;
   --warn:#f59e0b; --danger:#ef4444; --text:#f5f7ff; --muted:#9aa5c5;
 }
-*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 10% 0%,#21103d 0,#070912 34%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+*{box-sizing:border-box} :focus-visible{outline:2px solid var(--purple2);outline-offset:2px} body{margin:0;background:radial-gradient(circle at 10% 0%,#21103d 0,#070912 34%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
 header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(7,9,18,.9);border-bottom:1px solid var(--stroke);padding:18px 26px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:14px} .logo{font-weight:900;text-transform:lowercase;letter-spacing:.13em;font-size:25px;color:#fff} .logo span{color:var(--purple2)}
 .tag{font-size:12px;color:var(--purple2);text-transform:uppercase;letter-spacing:.2em}
@@ -91,8 +91,8 @@ input,select{width:100%;border:1px solid var(--stroke);background:#0b0e19;color:
 <div id="board" class="board"></div>
 <p class="note">As artes ainda não estão inseridas neste painel. Ao gerar cada lote, salve os PNGs nos caminhos exibidos no detalhe de cada post e atualize o status.</p>
 </main>
-<div class="drawer" id="drawer">
-  <button class="close" onclick="closeDrawer()">Fechar</button>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <button class="close" id="closeDrawerBtn" aria-label="Fechar gaveta" onclick="closeDrawer()">Fechar</button>
   <div id="drawerContent"></div>
 </div>
 <script>
@@ -140,16 +140,25 @@ function render() {
     <div class="post-footer"><select onchange="setStatus('${p.post_id}', this.value)">${DB.statuses.map(s=>`<option ${getStatus(p.post_id,p.status)===s?'selected':''}>${s}</option>`).join('')}</select><button class="details-btn" onclick="openPost('${p.post_id}')">Arquivos</button></div>
   </article>`).join('');
 }
+let lastActiveElement = null;
 function openPost(id) {
+ lastActiveElement = document.activeElement;
  const p=DB.posts.find(x=>x.post_id===id);
- document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2>${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">${p.season}</div><h2 id="drawerTitle">${escapeHTML(p.post_id)} • ${escapeHTML(p.theme)}</h2><p>${escapeHTML(p.headline)}</p><p style="color:var(--muted)">Pasta: <br><code>${escapeHTML(p.folder)}</code></p><h3>7 arquivos previstos</h3>` + p.assets.map(a=>`<div class="asset"><b>${escapeHTML(a.type)}</b><br>${escapeHTML(a.filename)}<br><span style="color:var(--muted)">${escapeHTML(a.path)}</span></div>`).join('');
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.getElementById('closeDrawerBtn')?.focus(), 150);
 }
 function openBlocked() {
- document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2>Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
+ lastActiveElement = document.activeElement;
+ document.getElementById('drawerContent').innerHTML = `<div class="tag">Proteção anti-repetição</div><h2 id="drawerTitle">Jogos bloqueados (${DB.blocked.length})</h2><p style="color:var(--muted)">Títulos já informados ou já utilizados no projeto. Não usar em novos banners.</p><div class="blocked-list">` + DB.blocked.map(g=>`<span class="pill">${escapeHTML(g)}</span>`).join('') + '</div>';
  document.getElementById('drawer').classList.add('show');
+ setTimeout(() => document.getElementById('closeDrawerBtn')?.focus(), 150);
 }
-function closeDrawer() { document.getElementById('drawer').classList.remove('show'); }
+function closeDrawer() {
+ document.getElementById('drawer').classList.remove('show');
+ if (lastActiveElement && typeof lastActiveElement.focus === 'function') lastActiveElement.focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('drawer').classList.contains('show')) closeDrawer(); });
 function exportBackup() {
  const content = JSON.stringify({savedAt:new Date().toISOString(), statusState}, null, 2);
  const blob = new Blob([content], {type:'application/json'});

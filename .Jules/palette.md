@@ -1,0 +1,3 @@
+## 2026-03-31 - Focus Management in Animated Drawers
+**Learning:** Animated drawer/dialog components using CSS transitions (`transform: translateX(...)`) require a slight delay (e.g., 150ms) when setting focus programmatically on the close button upon opening, as immediate `.focus()` calls can fail if the browser doesn't consider the element interactable before transition start. Always save `document.activeElement` before opening and restore focus upon closing.
+**Action:** When creating modal drawers or dialogs, track `lastActiveElement`, delay focus shift with `setTimeout(..., 150)`, and restore focus to `lastActiveElement` upon dismissal (including Escape key handling).
