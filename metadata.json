@@ -1,0 +1,6 @@
+{
+  "name": "Fxxico Content Calendar",
+  "description": "A centralized 60-post content calendar planning tool with progress tracking, filtering, and export capabilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
