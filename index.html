@@ -328,10 +328,10 @@
                 <div class="h-full ${isZerado ? 'bg-brand-green' : 'bg-gradient-to-r from-brand-purple to-purple-400'} transition-all duration-500" style="width: ${pct}%"></div>
               </div>
               <div class="flex justify-between mt-2 gap-2">
-                <button onclick="updateGameProgress('${g.id}', -1)" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-slate-500 rounded text-xs text-slate-300">-1 Ep</button>
-                <button onclick="updateGameProgress('${g.id}', 1)" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-brand-purple text-brand-purple rounded text-xs">+1 Ep</button>
-                ${g.status === 'Backlog' ? `<button onclick="setGameStatus('${g.id}', 'Ativo')" class="flex-1 py-1 bg-brand-purple/20 text-brand-purple border border-brand-purple/50 rounded text-xs">Iniciar</button>` : ''}
-                ${g.status === 'Ativo' ? `<button onclick="setGameStatus('${g.id}', 'Zerado')" class="flex-1 py-1 bg-brand-green/20 text-brand-green border border-brand-green/50 rounded text-xs">Zerar</button>` : ''}
+                <button onclick="updateGameProgress('${g.id}', -1)" aria-label="Diminuir 1 episódio de ${g.name}" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-slate-500 rounded text-xs text-slate-300">-1 Ep</button>
+                <button onclick="updateGameProgress('${g.id}', 1)" aria-label="Aumentar 1 episódio de ${g.name}" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-brand-purple text-brand-purple rounded text-xs">+1 Ep</button>
+                ${g.status === 'Backlog' ? `<button onclick="setGameStatus('${g.id}', 'Ativo')" aria-label="Iniciar jogo ${g.name}" class="flex-1 py-1 bg-brand-purple/20 text-brand-purple border border-brand-purple/50 rounded text-xs">Iniciar</button>` : ''}
+                ${g.status === 'Ativo' ? `<button onclick="setGameStatus('${g.id}', 'Zerado')" aria-label="Marcar ${g.name} como zerado" class="flex-1 py-1 bg-brand-green/20 text-brand-green border border-brand-green/50 rounded text-xs">Zerar</button>` : ''}
               </div>
             </div>
           `;
@@ -343,7 +343,7 @@
               <h3 class="font-bold text-white text-base leading-tight">${g.name}</h3>
               <div class="flex gap-2 items-center shrink-0 ml-2">
                 ${statusBadge}
-                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
+                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" aria-label="Remover ${g.name} do pipeline" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
               </div>
             </div>
             <div class="flex gap-3 text-xs font-mono text-slate-500">
