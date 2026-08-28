@@ -43,6 +43,11 @@
       @apply px-2.5 py-0.5 rounded-full text-xs font-mono font-medium tracking-wide border;
     }
     
+    *:focus-visible {
+      outline: 2px solid var(--color-brand-purple);
+      outline-offset: 2px;
+    }
+
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -343,7 +348,7 @@
               <h3 class="font-bold text-white text-base leading-tight">${g.name}</h3>
               <div class="flex gap-2 items-center shrink-0 ml-2">
                 ${statusBadge}
-                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
+                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" aria-label="Remover jogo ${g.name}" title="Remover jogo" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
               </div>
             </div>
             <div class="flex gap-3 text-xs font-mono text-slate-500">
@@ -379,7 +384,7 @@
 
         return `
           <div class="p-3 bg-bg-elevated border border-border-subtle rounded-lg flex items-start gap-3 transition-opacity ${c.done ? 'opacity-50' : ''}">
-            <button onclick="toggleClip('${c.id}')" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
+            <button onclick="toggleClip('${c.id}')" aria-label="${c.done ? 'Marcar corte como não concluído' : 'Marcar corte como concluído'}" title="${c.done ? 'Concluído' : 'Pendente'}" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
               <i data-lucide="check" class="w-3 h-3"></i>
             </button>
             <div class="flex-1 min-w-0">
@@ -390,7 +395,7 @@
               <p class="text-sm text-slate-300 mb-2 leading-snug">${c.desc}</p>
               <div class="flex justify-between items-center">
                 <span class="badge ${typeColor} text-[10px] bg-bg-panel">${c.type}</span>
-                <button onclick="deleteClip('${c.id}')" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                <button onclick="deleteClip('${c.id}')" aria-label="Remover corte" title="Remover corte" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
               </div>
             </div>
           </div>
