@@ -135,13 +135,13 @@
         <!-- Add Game Form -->
         <form id="game-form" class="grid grid-cols-12 gap-3 mb-6 p-4 bg-bg-elevated rounded-xl border border-border-subtle">
           <div class="col-span-12 sm:col-span-6">
-            <input type="text" id="g-name" required placeholder="Nome do Jogo" class="input-field">
+            <input type="text" id="g-name" required placeholder="Nome do Jogo" aria-label="Nome do jogo" class="input-field">
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <input type="number" id="g-hltb" required min="1" placeholder="Horas (HLTB)" class="input-field" title="Tempo médio para zerar">
+            <input type="number" id="g-hltb" required min="1" placeholder="Horas (HLTB)" aria-label="Tempo médio para zerar em horas" class="input-field" title="Tempo médio para zerar">
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <select id="g-cat" class="input-field px-2">
+            <select id="g-cat" aria-label="Categoria do jogo" class="input-field px-2">
               <option value="Campanha">Campanha</option>
               <option value="Co-op">Co-op</option>
               <option value="Indie">Indie</option>
@@ -178,17 +178,17 @@
 
         <!-- Add Clip Form -->
         <form id="clip-form" class="space-y-3 mb-6 p-4 bg-bg-elevated rounded-xl border border-border-subtle">
-          <input type="text" id="c-game" required placeholder="Jogo (ex: Valorant, RE4)" class="input-field text-sm">
+          <input type="text" id="c-game" required placeholder="Jogo (ex: Valorant, RE4)" aria-label="Nome do jogo para o corte" class="input-field text-sm">
           <div class="flex gap-2">
-            <input type="text" id="c-time" placeholder="Tempo (01:23:00)" class="input-field text-sm w-1/2 font-mono">
-            <select id="c-type" class="input-field text-sm w-1/2 px-2">
+            <input type="text" id="c-time" placeholder="Tempo (01:23:00)" aria-label="Minuto ou tempo do corte" class="input-field text-sm w-1/2 font-mono">
+            <select id="c-type" aria-label="Tipo de corte" class="input-field text-sm w-1/2 px-2">
               <option value="Habilidade">High Play</option>
               <option value="Susto">Susto/Rage</option>
               <option value="Engraçado">Engraçado</option>
               <option value="História">Lore</option>
             </select>
           </div>
-          <input type="text" id="c-desc" required placeholder="O que aconteceu? (ex: 1v4 clutch)" class="input-field text-sm">
+          <input type="text" id="c-desc" required placeholder="O que aconteceu? (ex: 1v4 clutch)" aria-label="Descrição do corte" class="input-field text-sm">
           <button type="submit" class="btn-primary w-full py-2 bg-brand-green hover:bg-green-500 text-black">Registrar Corte</button>
         </form>
 
@@ -266,8 +266,8 @@
               <span class="badge ${typeColor}">${d.type}</span>
             </div>
             <div class="flex flex-col gap-1">
-              <input type="text" value="${d.game}" onchange="updateSchedule('${day}', 'game', this.value)" class="bg-transparent border-none text-sm font-semibold text-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-purple rounded px-1 -mx-1" placeholder="Jogo Principal">
-              <input type="text" value="${d.extra}" onchange="updateSchedule('${day}', 'extra', this.value)" class="bg-transparent border-none text-xs text-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-purple rounded px-1 -mx-1" placeholder="Detalhes (ex: Ep 4, Highlights)">
+              <input type="text" value="${d.game}" onchange="updateSchedule('${day}', 'game', this.value)" aria-label="${day}: Jogo Principal" class="bg-transparent border-none text-sm font-semibold text-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-purple rounded px-1 -mx-1" placeholder="Jogo Principal">
+              <input type="text" value="${d.extra}" onchange="updateSchedule('${day}', 'extra', this.value)" aria-label="${day}: Detalhes" class="bg-transparent border-none text-xs text-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-purple rounded px-1 -mx-1" placeholder="Detalhes (ex: Ep 4, Highlights)">
             </div>
           </div>
         `;
@@ -343,7 +343,7 @@
               <h3 class="font-bold text-white text-base leading-tight">${g.name}</h3>
               <div class="flex gap-2 items-center shrink-0 ml-2">
                 ${statusBadge}
-                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
+                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" aria-label="Excluir jogo ${g.name}" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
               </div>
             </div>
             <div class="flex gap-3 text-xs font-mono text-slate-500">
@@ -379,7 +379,7 @@
 
         return `
           <div class="p-3 bg-bg-elevated border border-border-subtle rounded-lg flex items-start gap-3 transition-opacity ${c.done ? 'opacity-50' : ''}">
-            <button onclick="toggleClip('${c.id}')" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
+            <button onclick="toggleClip('${c.id}')" aria-label="${c.done ? 'Marcar corte como pendente' : 'Marcar corte como concluído'}" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
               <i data-lucide="check" class="w-3 h-3"></i>
             </button>
             <div class="flex-1 min-w-0">
@@ -390,7 +390,7 @@
               <p class="text-sm text-slate-300 mb-2 leading-snug">${c.desc}</p>
               <div class="flex justify-between items-center">
                 <span class="badge ${typeColor} text-[10px] bg-bg-panel">${c.type}</span>
-                <button onclick="deleteClip('${c.id}')" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                <button onclick="deleteClip('${c.id}')" aria-label="Excluir corte de ${c.game}" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
               </div>
             </div>
           </div>
