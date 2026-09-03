@@ -1,0 +1,3 @@
+## 2025-09-03 - Accessible Focus Indicators & Dynamic ARIA Attributes in Single-Page OS Dashboards
+**Learning:** In dynamically updated single-page web applications (like Creator OS), icon-only buttons rendered via innerHTML strings and custom filter toggles often lack accessible names (`aria-label`) and state indicators (`aria-pressed`). Adding `:focus-visible` CSS rules ensures a consistent, high-contrast keyboard navigation indicator across dark-themed custom components.
+**Action:** Always complement dynamic JS innerHTML templates with context-aware `aria-label`s and update toggle state attributes (`aria-pressed`) programmatically whenever filter state changes.
