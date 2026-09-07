@@ -1,0 +1,3 @@
+## 2026-09-07 - Accessible ARIA Labels for Dynamic Card Controls and Unlabelled Inputs
+**Learning:** Dynamic HTML template strings in `renderGames` and `renderClips` omit ARIA labels for icon-only action buttons (`deleteGame`, `toggleClip`, `deleteClip`), rendering them inaccessible to screen readers despite visual tooltips. Form inputs in `#game-form`, `#clip-form`, and `renderSchedule` also rely solely on placeholders.
+**Action:** When creating or updating dynamic UI templates or form controls in vanilla JS apps, always explicitly pass dynamic contextual `aria-label` attributes (e.g. `aria-label="Remover ${g.name}"`) alongside visual iconography.
