@@ -1,0 +1,3 @@
+## 2025-05-18 - Dynamic Content & Accessibility Labels in Creator OS
+**Learning:** Single-page dashboard components generated dynamically via JavaScript (such as lists of games and clips) often omit accessible ARIA labels, roles (`role="checkbox"` for custom toggle states), and `aria-pressed` states on filter toggles, leaving screen readers unable to convey item context or control states.
+**Action:** Always complement dynamic template string rendering with context-aware `aria-label`s (e.g. including item names/descriptions) and state attributes (`aria-checked`, `aria-pressed`) when creating inline action buttons.
