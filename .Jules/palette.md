@@ -1,0 +1,3 @@
+## 2025-05-18 - Dynamic Component Re-renders & Focus Management in Vanilla JS Dashboards
+**Learning:** In vanilla JavaScript dashboards that update the DOM via `innerHTML` templates on state changes, dynamic interactive controls (such as toggle check buttons, filter buttons, and action icons) frequently omit ARIA labels and state attributes (`aria-pressed`, `aria-checked`). Furthermore, default browser focus outlines are lost or obscured by dark-mode panel styling.
+**Action:** Always include dynamic `aria-label`, `role`, and `aria-checked`/`aria-pressed` attributes inside template strings, and define a global `:focus-visible` CSS rule in the root stylesheet for dark mode UI accessibility.
