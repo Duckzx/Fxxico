@@ -64,8 +64,8 @@
         <div class="text-xs text-slate-400 font-mono hidden md:block">
           Main: <span class="text-white font-semibold">Valorant</span>
         </div>
-        <button onclick="exportData()" class="btn-secondary py-1.5 px-3">
-          <i data-lucide="download" class="w-4 h-4"></i> Backup
+        <button onclick="exportData()" class="btn-secondary py-1.5 px-3" aria-label="Fazer backup dos dados em JSON" title="Fazer backup dos dados em JSON">
+          <i data-lucide="download" class="w-4 h-4" aria-hidden="true"></i> Backup
         </button>
       </div>
     </div>
@@ -328,10 +328,10 @@
                 <div class="h-full ${isZerado ? 'bg-brand-green' : 'bg-gradient-to-r from-brand-purple to-purple-400'} transition-all duration-500" style="width: ${pct}%"></div>
               </div>
               <div class="flex justify-between mt-2 gap-2">
-                <button onclick="updateGameProgress('${g.id}', -1)" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-slate-500 rounded text-xs text-slate-300">-1 Ep</button>
-                <button onclick="updateGameProgress('${g.id}', 1)" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-brand-purple text-brand-purple rounded text-xs">+1 Ep</button>
-                ${g.status === 'Backlog' ? `<button onclick="setGameStatus('${g.id}', 'Ativo')" class="flex-1 py-1 bg-brand-purple/20 text-brand-purple border border-brand-purple/50 rounded text-xs">Iniciar</button>` : ''}
-                ${g.status === 'Ativo' ? `<button onclick="setGameStatus('${g.id}', 'Zerado')" class="flex-1 py-1 bg-brand-green/20 text-brand-green border border-brand-green/50 rounded text-xs">Zerar</button>` : ''}
+                <button onclick="updateGameProgress('${g.id}', -1)" aria-label="Diminuir 1 episódio de ${g.name}" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-slate-500 rounded text-xs text-slate-300">-1 Ep</button>
+                <button onclick="updateGameProgress('${g.id}', 1)" aria-label="Aumentar 1 episódio de ${g.name}" class="flex-1 py-1 bg-bg-elevated border border-border-subtle hover:border-brand-purple text-brand-purple rounded text-xs">+1 Ep</button>
+                ${g.status === 'Backlog' ? `<button onclick="setGameStatus('${g.id}', 'Ativo')" aria-label="Iniciar campanha de ${g.name}" class="flex-1 py-1 bg-brand-purple/20 text-brand-purple border border-brand-purple/50 rounded text-xs">Iniciar</button>` : ''}
+                ${g.status === 'Ativo' ? `<button onclick="setGameStatus('${g.id}', 'Zerado')" aria-label="Marcar ${g.name} como zerado" class="flex-1 py-1 bg-brand-green/20 text-brand-green border border-brand-green/50 rounded text-xs">Zerar</button>` : ''}
               </div>
             </div>
           `;
@@ -343,7 +343,7 @@
               <h3 class="font-bold text-white text-base leading-tight">${g.name}</h3>
               <div class="flex gap-2 items-center shrink-0 ml-2">
                 ${statusBadge}
-                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
+                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" aria-label="Excluir jogo ${g.name}" title="Excluir jogo ${g.name}" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4" aria-hidden="true"></i></button>` : ''}
               </div>
             </div>
             <div class="flex gap-3 text-xs font-mono text-slate-500">
@@ -379,8 +379,8 @@
 
         return `
           <div class="p-3 bg-bg-elevated border border-border-subtle rounded-lg flex items-start gap-3 transition-opacity ${c.done ? 'opacity-50' : ''}">
-            <button onclick="toggleClip('${c.id}')" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
-              <i data-lucide="check" class="w-3 h-3"></i>
+            <button onclick="toggleClip('${c.id}')" aria-label="${c.done ? 'Marcar corte como não concluído' : 'Marcar corte como concluído'}: ${c.desc}" aria-pressed="${c.done}" title="${c.done ? 'Marcar corte como não concluído' : 'Marcar corte como concluído'}" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
+              <i data-lucide="check" class="w-3 h-3" aria-hidden="true"></i>
             </button>
             <div class="flex-1 min-w-0">
               <div class="flex justify-between items-baseline mb-1">
@@ -390,7 +390,7 @@
               <p class="text-sm text-slate-300 mb-2 leading-snug">${c.desc}</p>
               <div class="flex justify-between items-center">
                 <span class="badge ${typeColor} text-[10px] bg-bg-panel">${c.type}</span>
-                <button onclick="deleteClip('${c.id}')" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                <button onclick="deleteClip('${c.id}')" aria-label="Excluir corte: ${c.desc}" title="Excluir corte" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5" aria-hidden="true"></i></button>
               </div>
             </div>
           </div>
