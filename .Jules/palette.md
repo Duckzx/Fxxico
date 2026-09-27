@@ -1,0 +1,3 @@
+## 2025-05-18 - Keyboard Focus Indicators and Screen Reader Labels for Icon-Only Actions
+**Learning:** Single-page dashboard applications relying on custom Tailwind button components and icon libraries (like Lucide) often lack native browser focus rings and accessible names on icon-only actions (such as delete trash icons and custom clip toggle buttons), rendering them invisible to screen reader users and keyboard navigators.
+**Action:** Always complement custom focus styles with a global `:focus-visible` rule using brand theme CSS variables, and attach `aria-label`, `role="checkbox"`, and `aria-checked` attributes to icon-only buttons during template rendering.
