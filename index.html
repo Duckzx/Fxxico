@@ -48,6 +48,12 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #252b45; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+
+    /* Focus Visible Outline */
+    *:focus-visible {
+      outline: 2px solid var(--color-brand-purple);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body class="text-slate-300 min-h-screen antialiased flex flex-col">
@@ -141,7 +147,7 @@
             <input type="number" id="g-hltb" required min="1" placeholder="Horas (HLTB)" class="input-field" title="Tempo médio para zerar">
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <select id="g-cat" class="input-field px-2">
+            <select id="g-cat" class="input-field px-2" aria-label="Categoria do jogo">
               <option value="Campanha">Campanha</option>
               <option value="Co-op">Co-op</option>
               <option value="Indie">Indie</option>
@@ -181,7 +187,7 @@
           <input type="text" id="c-game" required placeholder="Jogo (ex: Valorant, RE4)" class="input-field text-sm">
           <div class="flex gap-2">
             <input type="text" id="c-time" placeholder="Tempo (01:23:00)" class="input-field text-sm w-1/2 font-mono">
-            <select id="c-type" class="input-field text-sm w-1/2 px-2">
+            <select id="c-type" class="input-field text-sm w-1/2 px-2" aria-label="Tipo de corte">
               <option value="Habilidade">High Play</option>
               <option value="Susto">Susto/Rage</option>
               <option value="Engraçado">Engraçado</option>
@@ -343,7 +349,7 @@
               <h3 class="font-bold text-white text-base leading-tight">${g.name}</h3>
               <div class="flex gap-2 items-center shrink-0 ml-2">
                 ${statusBadge}
-                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
+                ${!isFixo ? `<button onclick="deleteGame('${g.id}')" aria-label="Excluir jogo" class="text-slate-600 hover:text-red-400 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
               </div>
             </div>
             <div class="flex gap-3 text-xs font-mono text-slate-500">
@@ -379,7 +385,7 @@
 
         return `
           <div class="p-3 bg-bg-elevated border border-border-subtle rounded-lg flex items-start gap-3 transition-opacity ${c.done ? 'opacity-50' : ''}">
-            <button onclick="toggleClip('${c.id}')" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
+            <button onclick="toggleClip('${c.id}')" aria-label="${c.done ? 'Marcar corte como não concluído' : 'Marcar corte como concluído'}" class="mt-0.5 shrink-0 w-5 h-5 rounded border ${c.done ? 'bg-brand-green border-brand-green text-black' : 'border-slate-500 text-transparent'} flex items-center justify-center transition-colors">
               <i data-lucide="check" class="w-3 h-3"></i>
             </button>
             <div class="flex-1 min-w-0">
@@ -390,7 +396,7 @@
               <p class="text-sm text-slate-300 mb-2 leading-snug">${c.desc}</p>
               <div class="flex justify-between items-center">
                 <span class="badge ${typeColor} text-[10px] bg-bg-panel">${c.type}</span>
-                <button onclick="deleteClip('${c.id}')" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+                <button onclick="deleteClip('${c.id}')" aria-label="Excluir corte" class="text-slate-600 hover:text-red-400"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
               </div>
             </div>
           </div>
