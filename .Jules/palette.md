@@ -1,0 +1,3 @@
+## 2025-05-14 - Global Keyboard Focus Indicators in Dark Themed Dashboards
+**Learning:** In dark-themed dashboards styled with custom CSS properties or Tailwind, custom styled inputs and icon-only buttons often strip default browser focus rings without adding keyboard-accessible outlines. Using `*:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 2px; }` restores clear visual affordance for keyboard users while preserving normal click states for mouse users.
+**Action:** Always include a global `:focus-visible` ring tied to the primary brand color token and complement dynamic icon-only controls with descriptive `aria-label` and `aria-pressed` states.
